@@ -10,6 +10,7 @@
 <body onload="init()">
     <header>
         Meme generator:
+        <button onclick="savedMemes()">Saved Memes</button>
     </header>
     <main>
         <div class="image-container">
@@ -51,11 +52,14 @@
                 <br>
                 <input type="color" onchange="updateTextColor(this.value)">
                 <br>
+                <button onclick="saveToLocalStorage()">save to local gallery</button>
+                <br>
                 <a href="#" class="download" onclick="downloadMeme(this)" download="my-img.jpg">download</a>
 
             </div>
 
         </div>
+
     </main>
     
     <footer>
@@ -64,6 +68,8 @@
 
     <script src="main.js"></script>
     <script src="meme-control.js"></script>
+    <script src="local-storage.js"></script>
+    <script src="utils.js"></script>
     
 </body>
 </html>

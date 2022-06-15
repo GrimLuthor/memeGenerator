@@ -11,7 +11,7 @@ var gMeme;
 function renderMeme(){
     
     var memeImg = new Image()
-    memeImg.src = gMeme.url
+    memeImg.src = gMeme.template
 
     
     //when the image ready draw it on the canvas
@@ -25,8 +25,10 @@ function renderMeme(){
 function createMeme(id,url){
     gMeme = {
         selectedImgId: id,
+        memeId: generateMemeId(),
         selectedLineIdx: 0,
         url: url,
+        template: url,
         lines: [
             {
                 txt: '',
@@ -51,7 +53,7 @@ function createMeme(id,url){
 
 function changeSelectedText(){
     var txt = gElInput.value
-    gMeme.lines[gMeme.selectedLineIdx].txt = txt.toUpperCase()
+    gMeme.lines[gMeme.selectedLineIdx].txt = txt.toUpperCase().trim()
     renderMeme()
 }
 
@@ -165,5 +167,5 @@ function updateTextColor(color){
 function downloadMeme(elLink){
     var imgContent = gElCanvas.toDataURL('image/jpeg')// image/jpeg the default format
     elLink.href = imgContent
-
+    
 }

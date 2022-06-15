@@ -110,3 +110,27 @@ function enterEditor(id,url){
     document.querySelector('.editor').style.display = 'flex'
     createMeme(id,url)
 }
+
+function editSavedMeme(id){
+    document.querySelector('.image-container').style.display = 'none'
+    document.querySelector('.editor').style.display = 'flex'
+    gMeme = loadFromLocalStorage(id)
+    renderMeme()
+}
+
+function savedMemes(){
+    document.querySelector('.image-container').style.display = 'flex'
+    document.querySelector('.editor').style.display = 'none'
+
+    renderSavedMemes()
+}
+
+function renderSavedMemes(){
+    var savedMemes = loadAllFromLocalStorage()
+
+    var strHTML = savedMemes.map((meme)=>{
+        return `<div class="image" onclick="editSavedMeme('${meme.memeId}')"><img src="${meme.url}"></div>`
+    }).join('')
+
+    document.querySelector('.image-container').innerHTML = strHTML
+}
