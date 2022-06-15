@@ -17,12 +17,40 @@
         </div>
 
         <div class="editor" style="display: none;">
-            <canvas class="meme"></canvas>
+            <canvas class="meme" width="500" height="500"></canvas>
 
 
             <div class="toolbar">
-                <input type="text" class="input-text" onchange="changeSelectedText()">
-                <button>Something</button>
+                <input type="text" class="input-text" placeholder="Top Text" oninput="changeSelectedText()">
+                <br>
+                <button onclick="switchLine()">change selection of text</button>
+                <br>
+                <button onclick="moveText(-5)">move text up</button>
+                <br>
+                <button onclick="moveText(5)">move text down</button>
+                <br>
+                <button onclick="addTextLine()">add text</button>
+                <br>
+                <button>delete text</button>
+                <br>
+                <button>make text bigger</button>
+                <br>
+                <button>make text smaller</button>
+                <br>
+                <button>align left</button>
+                <br>
+                <button>align center</button>
+                <br>
+                <button>align right</button>
+                <br>
+                <select name="font" id="font" class="font">
+                    <option value="Impact">Impact</option>
+                </select>
+                <br>
+                <button>stroke</button>
+                <br>
+                <button>color</button>
+
             </div>
 
         </div>

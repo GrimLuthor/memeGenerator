@@ -99,14 +99,14 @@ function init(){
 
 function renderGallery(){
     var strHTML = gImgs.map((img)=>{
-        return `<div class="image" onclick="enterEditor(${img.id})"><img src="${img.url}"></div>`
+        return `<div class="image" onclick="enterEditor(${img.id},'${img.url}')"><img src="${img.url}"></div>`
     }).join('')
 
     document.querySelector('.image-container').innerHTML = strHTML
 }
 
-function enterEditor(id){
+function enterEditor(id,url){
     document.querySelector('.image-container').style.display = 'none'
     document.querySelector('.editor').style.display = 'flex'
-    renderMeme(id)
+    createMeme(id,url)
 }
