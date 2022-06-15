@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meme Generator</title>
+    <link rel="stylesheet" href="style/main.css">
+</head>
+<body onload="init()">
+    <header>
+        Meme generator:
+    </header>
+    <main>
+        <div class="image-container">
+            <!-- gallery basically -->
+        </div>
+
+        <div class="editor" style="display: none;">
+            <canvas class="meme"></canvas>
+
+
+            <div class="toolbar">
+                <input type="text" class="input-text" onchange="changeSelectedText()">
+                <button>Something</button>
+            </div>
+
+        </div>
+    </main>
+    
+    <footer>
+        share and all this shit
+    </footer>
+
+    <script src="main.js"></script>
+    <script src="meme-control.js"></script>
+    
+</body>
+</html>

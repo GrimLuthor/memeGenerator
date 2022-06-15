@@ -1,0 +1,28 @@
+.editor {
+    width: auto;
+    display: flex;
+    margin-top: 5vh;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.meme {
+    width: 500px;
+    height: 500px;
+    border: 1px solid black;
+}
+
+.toolbar {
+    width: 500px;
+    height: 500px;
+    border: 1px solid black;
+}
+
+
+@media screen and (max-width: 1024px) {
+    .editor {
+        flex-direction: column-reverse;
+        align-items: center;
+    }
+
+}
