@@ -31,25 +31,25 @@
                 <br>
                 <button onclick="addTextLine()">add text</button>
                 <br>
-                <button>delete text</button>
+                <button onclick="deleteTextLine()">delete text</button>
                 <br>
-                <button>make text bigger</button>
+                <button onclick="updateTextSize(2)">make text bigger</button>
                 <br>
-                <button>make text smaller</button>
+                <button onclick="updateTextSize(-2)">make text smaller</button>
                 <br>
-                <button>align left</button>
+                <button onclick="updateAlignment('left')">align left</button>
                 <br>
-                <button>align center</button>
+                <button onclick="updateAlignment('center')">align center</button>
                 <br>
-                <button>align right</button>
+                <button onclick="updateAlignment('right')">align right</button>
                 <br>
                 <select name="font" id="font" class="font">
                     <option value="Impact">Impact</option>
                 </select>
                 <br>
-                <button>stroke</button>
+                <button onclick="changeStroke()">stroke</button>
                 <br>
-                <button>color</button>
+                <input type="color" onchange="updateTextColor(this.value)">
 
             </div>
 

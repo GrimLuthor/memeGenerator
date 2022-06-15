@@ -33,6 +33,7 @@ function createMeme(id,url){
                 size: 30,
                 align: 'center',
                 color: 'white',
+                stroke: true,
                 HeightAdjustment: 0
             },
             {
@@ -40,6 +41,7 @@ function createMeme(id,url){
                 size: 30,
                 align: 'center',
                 color: 'white',
+                stroke: true,
                 HeightAdjustment: 0
             }
         ]
@@ -57,15 +59,14 @@ function drawText(){
     for(var i = 0; i < gMeme.lines.length; i++){
 
 
-        gCtx.fillStyle = 'white'
-        gCtx.font = `${gMeme.lines[i].size}px Arial`
+        gCtx.fillStyle = gMeme.lines[i].color
+        gCtx.font = `${gMeme.lines[i].size}px Impact`
         gCtx.textAlign = gMeme.lines[i].align
 
 
 
         var height;
         var width;
-
 
 
         if(i === 0){
@@ -85,6 +86,11 @@ function drawText(){
             width = gElCanvas.width - 5
         }
 
+        if(gMeme.lines[i].stroke){
+            gCtx.lineWidth = 10
+            gCtx.miterLimit=2;
+            gCtx.strokeText(gMeme.lines[i].txt,width,height+gMeme.lines[i].HeightAdjustment)
+        }
         gCtx.fillText(gMeme.lines[i].txt,width,height+gMeme.lines[i].HeightAdjustment)
     }
 }
@@ -115,10 +121,36 @@ function addTextLine(){
             size: 30,
             align: 'center',
             color: 'white',
+            stroke: true,
             HeightAdjustment: 0
-            
         }
     )
     gMeme.selectedLineIdx = gMeme.lines.length-1
+    renderMeme()
+}
+
+function deleteTextLine(){
+    gMeme.lines.splice(gMeme.selectedLineIdx,1)
+    renderMeme()
+}
+
+
+function updateAlignment(align){
+    gMeme.lines[gMeme.selectedLineIdx].align = align
+    renderMeme()
+}
+
+function updateTextSize(pxNum){
+    gMeme.lines[gMeme.selectedLineIdx].size+=pxNum
+    renderMeme()
+}
+
+function changeStroke(){
+    gMeme.lines[gMeme.selectedLineIdx].stroke = !gMeme.lines[gMeme.selectedLineIdx].stroke
+    renderMeme()
+}
+
+function updateTextColor(color){
+    gMeme.lines[gMeme.selectedLineIdx].color = color
     renderMeme()
 }
