@@ -107,6 +107,8 @@ function switchLine(){
         else gElInput.placeholder = 'Additional Text'
     }
 
+    gElInput.value = gMeme.lines[gMeme.selectedLineIdx].txt
+
 }
 
 function moveText(pxNum){
@@ -126,12 +128,17 @@ function addTextLine(){
         }
     )
     gMeme.selectedLineIdx = gMeme.lines.length-1
+    gElInput.value = ''
+    gElInput.placeholder = 'Additional Text'
     renderMeme()
 }
 
 function deleteTextLine(){
+    if(gMeme.lines.length === 1) return;
     gMeme.lines.splice(gMeme.selectedLineIdx,1)
+    switchLine()
     renderMeme()
+    console.log(gMeme);
 }
 
 
@@ -153,4 +160,10 @@ function changeStroke(){
 function updateTextColor(color){
     gMeme.lines[gMeme.selectedLineIdx].color = color
     renderMeme()
+}
+
+function downloadMeme(elLink){
+    var imgContent = gElCanvas.toDataURL('image/jpeg')// image/jpeg the default format
+    elLink.href = imgContent
+
 }
