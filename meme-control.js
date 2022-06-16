@@ -8,6 +8,8 @@ var gElInput = document.querySelector('.input-text')
 
 var gMeme;
 
+var textSelection = true
+
 function renderMeme(){
     
     var memeImg = new Image()
@@ -36,7 +38,7 @@ function createMeme(id,url){
                 align: 'center',
                 color: 'white',
                 stroke: true,
-                HeightAdjustment: 0
+                pos: {x: gElCanvas.width/2,y: 35}
             },
             {
                 txt: '',
@@ -44,7 +46,7 @@ function createMeme(id,url){
                 align: 'center',
                 color: 'white',
                 stroke: true,
-                HeightAdjustment: 0
+                pos: {x: gElCanvas.width/2,y: gElCanvas.height - 35}
             }
         ]
     }
@@ -60,65 +62,52 @@ function changeSelectedText(){
 function drawText(){
     for(var i = 0; i < gMeme.lines.length; i++){
 
-
+        gCtx.setLineDash([]);
+        gCtx.strokeStyle = 'black'
         gCtx.fillStyle = gMeme.lines[i].color
         gCtx.font = `${gMeme.lines[i].size}px Impact`
         gCtx.textAlign = gMeme.lines[i].align
 
 
-
-        var height;
-        var width;
-
-
-        if(i === 0){
-            height = gMeme.lines[i].size+5
-        }else if(i === 1){
-            height = gElCanvas.width-gMeme.lines[i].size-5
-        }else{
-            height = gElCanvas.height/2
-        }
-
-
-        if(gMeme.lines[i].align === 'center'){
-            width = gElCanvas.width/2
-        }else if(gMeme.lines[i].align === 'left'){
-            width = 5
-        }else{
-            width = gElCanvas.width - 5
-        }
-
         if(gMeme.lines[i].stroke){
             gCtx.lineWidth = 10
             gCtx.miterLimit=2;
-            gCtx.strokeText(gMeme.lines[i].txt,width,height+gMeme.lines[i].HeightAdjustment)
+            gCtx.strokeText(gMeme.lines[i].txt,gMeme.lines[i].pos.x,gMeme.lines[i].pos.y)
         }
-        gCtx.fillText(gMeme.lines[i].txt,width,height+gMeme.lines[i].HeightAdjustment)
+
+        var lenghtOfText = gCtx.measureText(gMeme.lines[i].txt).width
+        gCtx.fillText(gMeme.lines[i].txt,gMeme.lines[i].pos.x,gMeme.lines[i].pos.y)
+
+
+        if(i===gMeme.selectedLineIdx && textSelection){
+            drawSelection(gMeme.lines[i].pos.x,gMeme.lines[i].pos.y,lenghtOfText,gMeme.lines[i].size,gMeme.lines[i].align)
+        }
     }
 }
 
-function switchLine(){
+function switchLine(event){
+    stopProp(event)
     if(gMeme.selectedLineIdx+2>gMeme.lines.length){
         gMeme.selectedLineIdx = 0
-        gElInput.value = ''
-        gElInput.placeholder = 'Top Text'
     }else{
         gMeme.selectedLineIdx++
-        gElInput.value = ''
-        if(gMeme.selectedLineIdx === 1) gElInput.placeholder = 'Bottom Text'
-        else gElInput.placeholder = 'Additional Text'
     }
 
+    gElInput.value = ''
+    gElInput.placeholder = 'Text '+(gMeme.selectedLineIdx+1)
     gElInput.value = gMeme.lines[gMeme.selectedLineIdx].txt
+    toggleSelection(true)
 
 }
 
-function moveText(pxNum){
-    gMeme.lines[gMeme.selectedLineIdx].HeightAdjustment +=pxNum
-    renderMeme()
+function moveText(pxNum,event){
+    stopProp(event)
+    gMeme.lines[gMeme.selectedLineIdx].pos.y +=pxNum
+    toggleSelection(true)
 }
 
-function addTextLine(){
+function addTextLine(event){
+    stopProp(event)
     gMeme.lines.push(
         {
             txt: '',
@@ -126,37 +115,49 @@ function addTextLine(){
             align: 'center',
             color: 'white',
             stroke: true,
-            HeightAdjustment: 0
+            pos: {x: gElCanvas.width/2,y: gElCanvas.height/2}
         }
     )
     gMeme.selectedLineIdx = gMeme.lines.length-1
     gElInput.value = ''
-    gElInput.placeholder = 'Additional Text'
-    renderMeme()
+    gElInput.placeholder = 'Text '+(gMeme.selectedLineIdx+1)
+    toggleSelection(true)
 }
 
-function deleteTextLine(){
+function deleteTextLine(event){
+    stopProp(event)
     if(gMeme.lines.length === 1) return;
     gMeme.lines.splice(gMeme.selectedLineIdx,1)
-    switchLine()
-    renderMeme()
-    console.log(gMeme);
+    switchLine(event)
+    toggleSelection(true)
 }
 
 
-function updateAlignment(align){
+function updateAlignment(align,event){
+    stopProp(event)
     gMeme.lines[gMeme.selectedLineIdx].align = align
-    renderMeme()
+    if(align === 'center'){
+        gMeme.lines[gMeme.selectedLineIdx].pos.x = gElCanvas.width/2
+    }else if(align === 'left'){
+        gMeme.lines[gMeme.selectedLineIdx].pos.x = 5
+    }else{
+        gMeme.lines[gMeme.selectedLineIdx].pos.x = gElCanvas.width - 5
+    }
+    toggleSelection(true)
 }
 
-function updateTextSize(pxNum){
+function updateTextSize(pxNum,event){
+    stopProp(event)
     gMeme.lines[gMeme.selectedLineIdx].size+=pxNum
-    renderMeme()
+    gMeme.lines[gMeme.selectedLineIdx].pos.y+=pxNum
+
+    toggleSelection(true)
 }
 
-function changeStroke(){
+function changeStroke(event){
+    stopProp(event)
     gMeme.lines[gMeme.selectedLineIdx].stroke = !gMeme.lines[gMeme.selectedLineIdx].stroke
-    renderMeme()
+    toggleSelection(true)
 }
 
 function updateTextColor(color){
@@ -165,7 +166,32 @@ function updateTextColor(color){
 }
 
 function downloadMeme(elLink){
-    var imgContent = gElCanvas.toDataURL('image/jpeg')// image/jpeg the default format
-    elLink.href = imgContent
-    
+    toggleSelection(false)
+   // setTimeout(()=>{
+        var imgContent = gElCanvas.toDataURL('image/jpeg')// image/jpeg the default format
+        elLink.href = imgContent 
+    //},1000)
+}
+
+function drawSelection(x,y,length,height,align){
+    gCtx.lineWidth = 1
+    gCtx.strokeStyle = 'white'
+    gCtx.setLineDash([6]);
+    if(align === 'left'){gCtx.strokeRect(x-5,y-height,length+10,height+10)}
+    else if (align === 'center') gCtx.strokeRect(x-(length/2)-5,y-height,length+10,height+10)
+    else gCtx.strokeRect(x-(length)-5,y-height,length+10,height+10)
+}
+
+// gElCanvas.addEventListener("mouseover",()=>{toggleSelection(true)})
+// gElCanvas.addEventListener("mouseleave",()=>{toggleSelection(false)})
+
+gElInput.addEventListener("focus",()=>{toggleSelection(true)})
+
+function toggleSelection(state){
+    textSelection = state
+    renderMeme()
+}
+
+function stopProp(ev){
+    ev.stopPropagation();
 }

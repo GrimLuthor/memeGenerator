@@ -21,40 +21,40 @@
             <canvas class="meme" width="500" height="500"></canvas>
 
 
-            <div class="toolbar">
-                <input type="text" class="input-text" placeholder="Top Text" oninput="changeSelectedText()">
+            <div class="toolbar" onclick="toggleSelection(false)">
+                <input type="text" class="input-text" placeholder="Text 1" oninput="changeSelectedText()" onclick="stopProp(event)">
                 <br>
-                <button onclick="switchLine()">change selection of text</button>
+                <button class="btn" onclick="switchLine(event)"><img src="ICONS/up-and-down-opposite-double-arrows-side-by-side.png" alt=""></button>
                 <br>
-                <button onclick="moveText(-5)">move text up</button>
+                <button class="btn" onclick="moveText(-5,event)">move text up</button>
                 <br>
-                <button onclick="moveText(5)">move text down</button>
+                <button class="btn" onclick="moveText(5,event)">move text down</button>
                 <br>
-                <button onclick="addTextLine()">add text</button>
+                <button class="btn" onclick="addTextLine(event)"><img src="ICONS/add.png"></button>
                 <br>
-                <button onclick="deleteTextLine()">delete text</button>
+                <button class="btn" onclick="deleteTextLine(event)"><img src="ICONS/trash.png"></button>
                 <br>
-                <button onclick="updateTextSize(2)">make text bigger</button>
+                <button class="btn" onclick="updateTextSize(2,event)"><img src="ICONS/increase font - icon.png"></button>
                 <br>
-                <button onclick="updateTextSize(-2)">make text smaller</button>
+                <button class="btn" onclick="updateTextSize(-2,event)"><img src="ICONS/decrease font - icon.png"></button>
                 <br>
-                <button onclick="updateAlignment('left')">align left</button>
+                <button class="btn" onclick="updateAlignment('left',event)"><img src="ICONS/align-to-left.png"></button>
                 <br>
-                <button onclick="updateAlignment('center')">align center</button>
+                <button class="btn" onclick="updateAlignment('center',event)"><img src="ICONS/center-text-alignment.png"></button>
                 <br>
-                <button onclick="updateAlignment('right')">align right</button>
+                <button  class="btn" onclick="updateAlignment('right',event)"><img src="ICONS/align-to-right.png"></button>
                 <br>
                 <select name="font" id="font" class="font">
                     <option value="Impact">Impact</option>
                 </select>
                 <br>
-                <button onclick="changeStroke()">stroke</button>
+                <button class="btn" onclick="changeStroke(event)"><img src="ICONS/text stroke.png"></button>
                 <br>
-                <input type="color" onchange="updateTextColor(this.value)">
+                <input class="colorpicker" type="color" onchange="updateTextColor(this.value)" onclick="stopProp(event)">
                 <br>
-                <button onclick="saveToLocalStorage()">save to local gallery</button>
+                <button class="btn" onclick="saveToLocalStorage()"><img src="ICONS/save.png"></button>
                 <br>
-                <a href="#" class="download" onclick="downloadMeme(this)" download="my-img.jpg">download</a>
+                <a class="download" href="#" class="download" onclick="downloadMeme(this)" download="my-img.jpg"><img src="ICONS/download.png"></a>
 
             </div>
 
@@ -70,6 +70,7 @@
     <script src="meme-control.js"></script>
     <script src="local-storage.js"></script>
     <script src="utils.js"></script>
+    <script src="movement-service.js"></script>
     
 </body>
 </html>
