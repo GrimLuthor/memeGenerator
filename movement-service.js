@@ -6,6 +6,7 @@ var gIsDrag = false
 const gTouchEvs = ['touchstart', 'touchmove', 'touchend']
 
 addMouseListeners()
+addTouchListeners()
 
 function addMouseListeners() {
     gElCanvas.addEventListener('mousemove', onMove)
