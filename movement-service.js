@@ -102,18 +102,28 @@ function getEvPos(ev) {
         x: ev.offsetX,
         y: ev.offsetY
     }
+
+    
     // Check if its a touch ev
     if (gTouchEvs.includes(ev.type)) {
+    
         //soo we will not trigger the mouse ev
         ev.preventDefault()
+        //Calc coefficient of img width and screen width
+        var memeSize = gElCanvas.width
+        var actualSize = document.querySelector(".meme").offsetWidth
+
+        var multiplicator = memeSize/actualSize
+
         //Gets the first touch point
         ev = ev.changedTouches[0]
         //Calc the right pos according to the touch screen
         pos = {
-            x: ev.pageX - ev.target.offsetLeft - ev.target.clientLeft,
-            y: ev.pageY - ev.target.offsetTop - ev.target.clientTop
+            x: (ev.pageX - ev.target.offsetLeft - ev.target.clientLeft)*multiplicator,
+            y: (ev.pageY - ev.target.offsetTop - ev.target.clientTop)*multiplicator
         }
     }
+
     return pos
 }
 
