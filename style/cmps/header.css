@@ -4,6 +4,7 @@ header {
     background-color: #2e6464;
     display: flex;
     align-content: space-around;
+    font-size: x-large;
 }
 
 .logo {
@@ -18,6 +19,7 @@ header {
 
 .nav {
     width: auto;
+    font-size: large;
     font-family: "Trebuchet MS", Helvetica, sans-serif;
     height: 10vh;
     position: absolute;
@@ -36,7 +38,7 @@ header {
     border-bottom: 1px solid black;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 616px) {
     .to-saved {
         display: none;
     }

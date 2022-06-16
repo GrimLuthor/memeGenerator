@@ -118,6 +118,8 @@ function editSavedMeme(id){
     document.querySelector('.editor').style.display = 'flex'
     gMeme = loadFromLocalStorage(id)
     renderMeme()
+    gElInput.value = gMeme.lines[0].txt
+    gElInput.placeholder = 'Text 1'
 }
 
 function savedMemes(){
@@ -141,6 +143,8 @@ function renderSavedMemes(){
 }
 
 function toGallery(){
+    gElInput.value = ''
+    gElInput.placeholder = 'Text 1'
     document.querySelector('.dropdown').classList.add('hidden')
     document.querySelector('.image-container').style.display = 'flex'
     document.querySelector('.editor').style.display = 'none'

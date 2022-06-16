@@ -26,21 +26,21 @@
 }
 
 .dropdown{
-    background-color: #3c8383;
+    background-color: rgb(184, 193, 193);
     position: absolute;
     right: 0;
     top: 10vh;
-    height: 200px;
-    width: 10vh;
+    height: 10vh;
+    width: 40vw;
 }
 
 .btn-d {
     height: 50%;
     width: 100%;
-    font-size: larger;
+    font-size: largeR;
     text-align: center;
-    line-height: 10vh;
-    border: 1px solid #2e6464;
+
+    border: 1px solid #182b2b;
 }
 
 .btn-d:hover {
@@ -48,7 +48,7 @@
 }
 
 
-@media screen and (max-width: 600px){
+@media screen and (max-width: 616px){
     .dropbtn {
         display: block;
     }
