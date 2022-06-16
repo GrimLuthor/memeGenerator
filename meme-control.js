@@ -100,12 +100,6 @@ function switchLine(event){
 
 }
 
-function moveText(pxNum,event){
-    stopProp(event)
-    gMeme.lines[gMeme.selectedLineIdx].pos.y +=pxNum
-    toggleSelection(true)
-}
-
 function addTextLine(event){
     stopProp(event)
     gMeme.lines.push(

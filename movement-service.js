@@ -35,6 +35,15 @@ function onDown(ev) {
             selectedText = true
             gSelectedText = gMeme.lines[i]
             gIsDrag = true
+            gMeme.selectedLineIdx = i
+
+
+            gElInput.value = ''
+            gElInput.placeholder = 'Text '+(gMeme.selectedLineIdx+1)
+            gElInput.value = gMeme.lines[gMeme.selectedLineIdx].txt
+            toggleSelection(true)
+
+            
             break;
         }
     }
