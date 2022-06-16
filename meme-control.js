@@ -55,7 +55,7 @@ function createMeme(id,url){
 
 function changeSelectedText(){
     var txt = gElInput.value
-    gMeme.lines[gMeme.selectedLineIdx].txt = txt.toUpperCase().trim()
+    gMeme.lines[gMeme.selectedLineIdx].txt = txt.trim()
     renderMeme()
 }
 
@@ -72,11 +72,11 @@ function drawText(){
         if(gMeme.lines[i].stroke){
             gCtx.lineWidth = 10
             gCtx.miterLimit=2;
-            gCtx.strokeText(gMeme.lines[i].txt,gMeme.lines[i].pos.x,gMeme.lines[i].pos.y)
+            gCtx.strokeText(gMeme.lines[i].txt.toUpperCase(),gMeme.lines[i].pos.x,gMeme.lines[i].pos.y)
         }
 
-        var lenghtOfText = gCtx.measureText(gMeme.lines[i].txt).width
-        gCtx.fillText(gMeme.lines[i].txt,gMeme.lines[i].pos.x,gMeme.lines[i].pos.y)
+        var lenghtOfText = gCtx.measureText(gMeme.lines[i].txt.toUpperCase()).width
+        gCtx.fillText(gMeme.lines[i].txt.toUpperCase(),gMeme.lines[i].pos.x,gMeme.lines[i].pos.y)
 
 
         if(i===gMeme.selectedLineIdx && textSelection){

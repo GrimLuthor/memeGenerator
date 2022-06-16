@@ -9,8 +9,16 @@
 </head>
 <body onload="init()">
     <header>
-        Meme generator:
-        <button onclick="savedMemes()">Saved Memes</button>
+        <div class="dropbtn" onclick="dropdown()">menu</div>
+        <div class="dropdown hidden">
+            <div class="btn-d" onclick="savedMemes()">Saved</div>
+            <div class="btn-d" onclick="toGallery()">Gallery</div>
+        </div>
+        <div class="logo"><img src="LOGO.png"></div>
+        <div class="nav">
+            <div class="to-saved"><h1 onclick="savedMemes()">Saved Memes</h1></div>
+            <div class="to-gallery"><h1 onclick="toGallery()">Gallery</h1></div>
+        </div>
     </header>
     <main>
         <div class="image-container">
@@ -22,36 +30,42 @@
 
 
             <div class="toolbar" onclick="toggleSelection(false)">
-                <input type="text" class="input-text" placeholder="Text 1" oninput="changeSelectedText()" onclick="stopProp(event)">
-                <br>
-                <button class="btn" onclick="switchLine(event)"><img src="ICONS/up-and-down-opposite-double-arrows-side-by-side.png" alt=""></button>
-                <br>
-                <button class="btn" onclick="addTextLine(event)"><img src="ICONS/add.png"></button>
-                <br>
-                <button class="btn" onclick="deleteTextLine(event)"><img src="ICONS/trash.png"></button>
-                <br>
-                <button class="btn" onclick="updateTextSize(2,event)"><img src="ICONS/increase font - icon.png"></button>
-                <br>
-                <button class="btn" onclick="updateTextSize(-2,event)"><img src="ICONS/decrease font - icon.png"></button>
-                <br>
-                <button class="btn" onclick="updateAlignment('left',event)"><img src="ICONS/align-to-left.png"></button>
-                <br>
-                <button class="btn" onclick="updateAlignment('center',event)"><img src="ICONS/center-text-alignment.png"></button>
-                <br>
-                <button  class="btn" onclick="updateAlignment('right',event)"><img src="ICONS/align-to-right.png"></button>
-                <br>
-                <select name="font" id="font" class="font">
-                    <option value="Impact">Impact</option>
-                </select>
-                <br>
-                <button class="btn" onclick="changeStroke(event)"><img src="ICONS/text stroke.png"></button>
-                <br>
-                <input class="colorpicker" type="color" onchange="updateTextColor(this.value)" onclick="stopProp(event)">
-                <br>
-                <button class="btn" onclick="saveToLocalStorage()"><img src="ICONS/save.png"></button>
+                <div class="input-div">
+                    <input type="text" class="input-text" placeholder="Text 1" oninput="changeSelectedText()" onclick="stopProp(event)">
+                </div>
+                <div class="delete-add-switch">
+                    <button class="btn" onclick="switchLine(event)"><img src="ICONS/up-and-down-opposite-double-arrows-side-by-side.png" alt=""></button>
+                    <button class="btn" onclick="addTextLine(event)"><img src="ICONS/add.png"></button>
+                    <button class="btn" onclick="deleteTextLine(event)"><img src="ICONS/trash.png"></button>
+                </div>
+                <div class="text-manipulation">
+                    <button class="btn" onclick="updateTextSize(2,event)"><img src="ICONS/increase font - icon.png"></button>
+
+                    <button class="btn" onclick="updateTextSize(-2,event)"><img src="ICONS/decrease font - icon.png"></button>
+
+                    <button class="btn" onclick="updateAlignment('left',event)"><img src="ICONS/align-to-left.png"></button>
+
+                    <button class="btn" onclick="updateAlignment('center',event)"><img src="ICONS/center-text-alignment.png"></button>
+
+                    <button  class="btn" onclick="updateAlignment('right',event)"><img src="ICONS/align-to-right.png"></button>
+                </div>
+                <div class="text-decoration">
+                    <select name="font" id="font" class="font">
+                        <option value="Impact">Impact</option>
+                    </select>
+
+                    <button class="btn" onclick="changeStroke(event)"><img src="ICONS/text stroke.png"></button>
+
+                    <input class="colorpicker" type="color" value="#FFFFFF" onchange="updateTextColor(this.value)" onclick="stopProp(event)">
+
+                </div>
+                
+                <div class="save-share">
+                    <button class="btn" onclick="saveToLocalStorage()"><img src="ICONS/save.png"></button>
                 <br>
                 <a class="download" href="#" class="download" onclick="downloadMeme(this)" download="my-img.jpg"><img src="ICONS/download.png"></a>
-
+                </div>
+          
             </div>
 
         </div>
@@ -59,7 +73,7 @@
     </main>
     
     <footer>
-        share and all this shit
+        <h1>Daniel Olenev</h1>
     </footer>
 
     <script src="main.js"></script>
@@ -67,6 +81,7 @@
     <script src="local-storage.js"></script>
     <script src="utils.js"></script>
     <script src="movement-service.js"></script>
+    <script src="dropdown.js"></script>
     
 </body>
 </html>

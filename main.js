@@ -119,7 +119,10 @@ function editSavedMeme(id){
 }
 
 function savedMemes(){
+    document.querySelector('.dropdown').classList.add('hidden')
     document.querySelector('.image-container').style.display = 'flex'
+    document.querySelector('.to-saved').style.borderBottom = '1px solid black'
+    document.querySelector('.to-gallery').style.borderBottom = '0'
     document.querySelector('.editor').style.display = 'none'
 
     renderSavedMemes()
@@ -133,4 +136,13 @@ function renderSavedMemes(){
     }).join('')
 
     document.querySelector('.image-container').innerHTML = strHTML
+}
+
+function toGallery(){
+    document.querySelector('.dropdown').classList.add('hidden')
+    document.querySelector('.image-container').style.display = 'flex'
+    document.querySelector('.editor').style.display = 'none'
+    document.querySelector('.to-saved').style.borderBottom = '0'
+    document.querySelector('.to-gallery').style.borderBottom = '1px solid black'
+    renderGallery()
 }

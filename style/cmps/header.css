@@ -2,4 +2,46 @@ header {
     width: auto;
     height: 10vh;
     background-color: #2e6464;
+    display: flex;
+    align-content: space-around;
+}
+
+.logo {
+    margin: 2vh;
+}
+
+.logo img {
+    max-width: 200px;
+    max-height: 8vh;
+    object-fit: cover;
+}
+
+.nav {
+    width: auto;
+    font-family: "Trebuchet MS", Helvetica, sans-serif;
+    height: 10vh;
+    position: absolute;
+    right: 0;
+    display: flex;
+    align-items: center;
+}
+
+.to-saved {
+    margin: 1vh;
+
+}
+
+.to-gallery {
+    margin: 1vh;
+    border-bottom: 1px solid black;
+}
+
+@media screen and (max-width: 600px) {
+    .to-saved {
+        display: none;
+    }
+    
+    .to-gallery {
+       display: none;
+    }
 }
