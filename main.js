@@ -106,12 +106,14 @@ function renderGallery(){
 }
 
 function enterEditor(id,url){
+    document.querySelector('.dropdown').classList.add('hidden')
     document.querySelector('.image-container').style.display = 'none'
     document.querySelector('.editor').style.display = 'flex'
     createMeme(id,url)
 }
 
 function editSavedMeme(id){
+    document.querySelector('.dropdown').classList.add('hidden')
     document.querySelector('.image-container').style.display = 'none'
     document.querySelector('.editor').style.display = 'flex'
     gMeme = loadFromLocalStorage(id)
@@ -145,4 +147,16 @@ function toGallery(){
     document.querySelector('.to-saved').style.borderBottom = '0'
     document.querySelector('.to-gallery').style.borderBottom = '1px solid black'
     renderGallery()
+}
+
+function shareAndDownload(){
+    document.querySelector('.download').classList.toggle('hidden')
+    document.querySelector('.save').classList.toggle('hidden')
+    document.querySelector('.facebook').classList.toggle('hidden')
+}
+
+function closeShare(){
+    document.querySelector('.download').classList.add('hidden')
+    document.querySelector('.save').classList.add('hidden')
+    document.querySelector('.facebook').classList.add('hidden')
 }

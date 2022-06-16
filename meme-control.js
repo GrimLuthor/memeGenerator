@@ -38,6 +38,7 @@ function createMeme(id,url){
                 align: 'center',
                 color: 'white',
                 stroke: true,
+                font: 'Impact',
                 pos: {x: gElCanvas.width/2,y: 35}
             },
             {
@@ -46,6 +47,7 @@ function createMeme(id,url){
                 align: 'center',
                 color: 'white',
                 stroke: true,
+                font: 'Impact',
                 pos: {x: gElCanvas.width/2,y: gElCanvas.height - 35}
             }
         ]
@@ -65,7 +67,7 @@ function drawText(){
         gCtx.setLineDash([]);
         gCtx.strokeStyle = 'black'
         gCtx.fillStyle = gMeme.lines[i].color
-        gCtx.font = `${gMeme.lines[i].size}px Impact`
+        gCtx.font = `${gMeme.lines[i].size}px ${gMeme.lines[i].font}`
         gCtx.textAlign = gMeme.lines[i].align
 
 
@@ -87,6 +89,7 @@ function drawText(){
 
 function switchLine(event){
     stopProp(event)
+    closeShare()
     if(gMeme.selectedLineIdx+2>gMeme.lines.length){
         gMeme.selectedLineIdx = 0
     }else{
@@ -102,6 +105,7 @@ function switchLine(event){
 
 function addTextLine(event){
     stopProp(event)
+    closeShare()
     gMeme.lines.push(
         {
             txt: '',
@@ -109,6 +113,7 @@ function addTextLine(event){
             align: 'center',
             color: 'white',
             stroke: true,
+            font: 'Impact',
             pos: {x: gElCanvas.width/2,y: gElCanvas.height/2}
         }
     )
@@ -120,6 +125,7 @@ function addTextLine(event){
 
 function deleteTextLine(event){
     stopProp(event)
+    closeShare()
     if(gMeme.lines.length === 1) return;
     gMeme.lines.splice(gMeme.selectedLineIdx,1)
     switchLine(event)
@@ -129,6 +135,7 @@ function deleteTextLine(event){
 
 function updateAlignment(align,event){
     stopProp(event)
+    closeShare()
     gMeme.lines[gMeme.selectedLineIdx].align = align
     if(align === 'center'){
         gMeme.lines[gMeme.selectedLineIdx].pos.x = gElCanvas.width/2
@@ -140,8 +147,14 @@ function updateAlignment(align,event){
     toggleSelection(true)
 }
 
+function changeFont(){
+    gMeme.lines[gMeme.selectedLineIdx].font = document.querySelector('.font').value
+    toggleSelection(true)
+}
+
 function updateTextSize(pxNum,event){
     stopProp(event)
+    closeShare()
     gMeme.lines[gMeme.selectedLineIdx].size+=pxNum
     gMeme.lines[gMeme.selectedLineIdx].pos.y+=pxNum
 
@@ -150,17 +163,19 @@ function updateTextSize(pxNum,event){
 
 function changeStroke(event){
     stopProp(event)
+    closeShare()
     gMeme.lines[gMeme.selectedLineIdx].stroke = !gMeme.lines[gMeme.selectedLineIdx].stroke
     toggleSelection(true)
 }
 
 function updateTextColor(color){
+    closeShare()
     gMeme.lines[gMeme.selectedLineIdx].color = color
     renderMeme()
 }
 
 function downloadMeme(elLink){
-    toggleSelection(false)
+    closeShare()
    // setTimeout(()=>{
         var imgContent = gElCanvas.toDataURL('image/jpeg')// image/jpeg the default format
         elLink.href = imgContent 
@@ -179,7 +194,12 @@ function drawSelection(x,y,length,height,align){
 // gElCanvas.addEventListener("mouseover",()=>{toggleSelection(true)})
 // gElCanvas.addEventListener("mouseleave",()=>{toggleSelection(false)})
 
-gElInput.addEventListener("focus",()=>{toggleSelection(true)})
+gElInput.addEventListener("focus",()=>{
+    toggleSelection(true)
+    
+
+    closeShare()
+})
 
 function toggleSelection(state){
     textSelection = state

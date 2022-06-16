@@ -50,8 +50,10 @@
                     <button  class="btn" onclick="updateAlignment('right',event)"><img src="ICONS/align-to-right.png"></button>
                 </div>
                 <div class="text-decoration">
-                    <select name="font" id="font" class="font">
+                    <select onclick="stopProp(event)" onchange="changeFont()" name="font" id="font" class="font">
                         <option value="Impact">Impact</option>
+                        <option value="Serif">Serif</option>
+                        <option value="Helvetica">Helvetica</option>
                     </select>
 
                     <button class="btn" onclick="changeStroke(event)"><img src="ICONS/text stroke.png"></button>
@@ -61,9 +63,10 @@
                 </div>
                 
                 <div class="save-share">
-                    <button class="btn" onclick="saveToLocalStorage()"><img src="ICONS/save.png"></button>
-                <br>
-                <a class="download" href="#" class="download" onclick="downloadMeme(this)" download="my-img.jpg"><img src="ICONS/download.png"></a>
+                    <button class="share btn" onclick="shareAndDownload()"><img src="ICONS/share.png"></button>
+                    <button class="save btn hidden" onclick="saveToLocalStorage()"><img src="ICONS/save.png"></button>
+                    <a class="download hidden" href="#" class="download" onclick="downloadMeme(this)" download="my-img.jpg"><img src="ICONS/download.png"></a>
+                    <button class="facebook btn hidden"><img src="ICONS/facebook-logo.png"></button>
                 </div>
           
             </div>

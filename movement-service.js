@@ -22,6 +22,9 @@ function addTouchListeners() {
 
 
 function onDown(ev) {
+
+    closeShare()
+   
     //Get the ev pos from mouse or touch
     const clickPos = getEvPos(ev)
 
@@ -62,7 +65,7 @@ function isTextClicked(pos,i){
     var rightWidth = false;
 
 
-    gCtx.font = `${gMeme.lines[i].size}px Impact`
+    gCtx.font = `${gMeme.lines[i].size}px ${gMeme.lines[i].font}`
     var length = gCtx.measureText(gMeme.lines[i].txt).width
 
 
