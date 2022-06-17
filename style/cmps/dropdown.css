@@ -26,12 +26,13 @@
 }
 
 .dropdown{
-    background-color: rgb(184, 193, 193);
+    background-color: rgb(210, 216, 216);
     position: absolute;
     right: 0;
     top: 10vh;
     height: 10vh;
     width: 40vw;
+    border-radius: 5px;
 }
 
 .btn-d {
@@ -39,8 +40,11 @@
     width: 100%;
     font-size: largeR;
     text-align: center;
+    font-variant: small-caps;
 
-    border: 1px solid #182b2b;
+    border: 1px solid #9f9f9f;
+    border-radius: 3px;
+    
 }
 
 .btn-d:hover {

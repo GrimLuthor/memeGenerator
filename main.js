@@ -4,92 +4,92 @@ var gImgs = [
     {
         id: 1,
         url: 'meme-imgs/1.jpg',
-        keywords: []
+        keywords: ['weird','trump']
     },
     {
         id: 2,
         url: 'meme-imgs/2.jpg',
-        keywords: []
+        keywords: ['animal','cute','dog']
     },
     {
         id: 3,
         url: 'meme-imgs/3.jpg',
-        keywords: []
+        keywords: ['animal','cute','baby']
     },
     {
         id: 4,
         url: 'meme-imgs/4.jpg',
-        keywords: []
+        keywords: ['animal','cat','tired']
     },
     {
         id: 5,
         url: 'meme-imgs/5.jpg',
-        keywords: []
+        keywords: ['baby','cute']
     },
     {
         id: 6,
         url: 'meme-imgs/6.jpg',
-        keywords: []
+        keywords: ['weird']
     },
     {
         id: 7,
         url: 'meme-imgs/7.jpg',
-        keywords: []
+        keywords: ['baby','cute']
     },
     {
         id: 8,
         url: 'meme-imgs/8.jpg',
-        keywords: []
+        keywords: ['weird','amused']
     },
     {
         id: 9,
         url: 'meme-imgs/9.jpg',
-        keywords: []
+        keywords: ['cute','evil','baby','laughing']
     },
     {
         id: 10,
         url: 'meme-imgs/10.jpg',
-        keywords: []
+        keywords: ['obama','laughing']
     },
     {
         id: 11,
         url: 'meme-imgs/11.jpg',
-        keywords: []
+        keywords: ['weird','bro']
     },
     {
         id: 12,
         url: 'meme-imgs/12.jpg',
-        keywords: []
+        keywords: ['you','explaining']
     },
     {
         id: 13,
         url: 'meme-imgs/13.jpg',
-        keywords: []
+        keywords: ['leonardo', 'dicaprio','toast','celebrating']
     },
     {
         id: 14,
         url: 'meme-imgs/14.jpg',
-        keywords: []
+        keywords: ['matrix','sunglasses']
     },
     {
         id: 15,
         url: 'meme-imgs/15.jpg',
-        keywords: []
+        keywords: ['mordor','boromir','lotr','explaining']
     },
     {
         id: 16,
         url: 'meme-imgs/16.jpg',
-        keywords: []
+        keywords: ['hilarious','amused']
     },
     {
         id: 17,
         url: 'meme-imgs/17.jpg',
-        keywords: []
+        keywords: ['putin','two','explaining']
     },
     {
         id: 18,
         url: 'meme-imgs/18.jpg',
-        keywords: []
+        keywords: ['toy','story','explaining']
     }
 ]
 
@@ -98,7 +98,9 @@ function init(){
 }
 
 function renderGallery(){
-    var strHTML = gImgs.map((img)=>{
+    var imgs = JSON.parse(JSON.stringify(gImgs))
+    imgs = filter(imgs)
+    var strHTML = imgs.map((img)=>{
         return `<div class="image" onclick="enterEditor(${img.id},'${img.url}')"><img src="${img.url}"></div>`
     }).join('')
 
@@ -106,10 +108,12 @@ function renderGallery(){
 }
 
 function enterEditor(id,url){
+    document.querySelector('.filter').classList.add('hidden')
     document.querySelector('.dropdown').classList.add('hidden')
     document.querySelector('.image-container').style.display = 'none'
     document.querySelector('.editor').style.display = 'flex'
     createMeme(id,url)
+    defaultTools()
 }
 
 function editSavedMeme(id){
@@ -117,12 +121,12 @@ function editSavedMeme(id){
     document.querySelector('.image-container').style.display = 'none'
     document.querySelector('.editor').style.display = 'flex'
     gMeme = loadFromLocalStorage(id)
+    defaultTools()
     renderMeme()
-    gElInput.value = gMeme.lines[0].txt
-    gElInput.placeholder = 'Text 1'
 }
 
 function savedMemes(){
+    document.querySelector('.filter').classList.add('hidden')
     document.querySelector('.dropdown').classList.add('hidden')
     document.querySelector('.image-container').style.display = 'flex'
     document.querySelector('.to-saved').style.borderBottom = '1px solid black'
@@ -147,8 +151,7 @@ function renderSavedMemes(){
 }
 
 function toGallery(){
-    gElInput.value = ''
-    gElInput.placeholder = 'Text 1'
+    document.querySelector('.filter').classList.remove('hidden')
     document.querySelector('.dropdown').classList.add('hidden')
     document.querySelector('.image-container').style.display = 'flex'
     document.querySelector('.editor').style.display = 'none'
@@ -167,4 +170,12 @@ function closeShare(){
     document.querySelector('.download').classList.add('hidden')
     document.querySelector('.save').classList.add('hidden')
     document.querySelector('.facebook').classList.add('hidden')
+}
+
+function defaultTools(){
+    closeShare()
+    gElInput.value = gMeme.lines[0].txt
+    gElInput.placeholder = 'Text 1'
+    document.querySelector('.font').value = 'Impact'
+    document.querySelector('.colorpicker').value = '#FFFFFF'
 }

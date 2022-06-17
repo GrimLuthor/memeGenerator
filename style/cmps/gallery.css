@@ -1,10 +1,4 @@
 .image-container {
-    --gap: 16px;
-    --num-cols: 4;
-    --row-height: 350px;
-    --col-height: 350px;
-
-
 
     box-sizing: border-box;
     padding: 20px;
@@ -26,4 +20,10 @@
 
 .optdelete {
     position: absolute;
+}
+
+
+.filter-input {
+    height: 50px;
+    font-size: larger;
 }
