@@ -117,6 +117,7 @@ function enterEditor(id,url){
 }
 
 function editSavedMeme(id){
+    document.querySelector('.filter-saved-input').classList.add('hidden')
     document.querySelector('.dropdown').classList.add('hidden')
     document.querySelector('.image-container').style.display = 'none'
     document.querySelector('.editor').style.display = 'flex'
@@ -127,6 +128,9 @@ function editSavedMeme(id){
 
 function savedMemes(){
     document.querySelector('.filter').classList.add('hidden')
+
+    document.querySelector('.filter-saved-input').classList.remove('hidden')
+
     document.querySelector('.dropdown').classList.add('hidden')
     document.querySelector('.image-container').style.display = 'flex'
     document.querySelector('.to-saved').style.borderBottom = '1px solid black'
@@ -138,6 +142,8 @@ function savedMemes(){
 
 function renderSavedMemes(){
     var savedMemes = loadAllFromLocalStorage()
+
+    var savedMemes = filterSaved(savedMemes)
 
     var strHTML = savedMemes.map((meme)=>{
         return `<div class="image" onclick="editSavedMeme('${meme.memeId}')">
@@ -152,6 +158,7 @@ function renderSavedMemes(){
 
 function toGallery(){
     document.querySelector('.filter').classList.remove('hidden')
+    document.querySelector('.filter-saved-input').classList.add('hidden')
     document.querySelector('.dropdown').classList.add('hidden')
     document.querySelector('.image-container').style.display = 'flex'
     document.querySelector('.editor').style.display = 'none'
