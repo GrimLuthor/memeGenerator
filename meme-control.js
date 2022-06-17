@@ -39,6 +39,7 @@ function createMeme(id,url){
                 color: 'white',
                 stroke: true,
                 font: 'Impact',
+                caps: true,
                 pos: {x: gElCanvas.width/2,y: 35}
             },
             {
@@ -48,6 +49,7 @@ function createMeme(id,url){
                 color: 'white',
                 stroke: true,
                 font: 'Impact',
+                caps: true,
                 pos: {x: gElCanvas.width/2,y: gElCanvas.height - 35}
             }
         ]
@@ -74,12 +76,21 @@ function drawText(){
         if(gMeme.lines[i].stroke){
             gCtx.lineWidth = 10
             gCtx.miterLimit=2;
-            gCtx.strokeText(gMeme.lines[i].txt.toUpperCase(),gMeme.lines[i].pos.x,gMeme.lines[i].pos.y)
+            if(gMeme.lines[i].caps){
+                gCtx.strokeText(gMeme.lines[i].txt.toUpperCase(),gMeme.lines[i].pos.x,gMeme.lines[i].pos.y)
+            }else{
+                gCtx.strokeText(gMeme.lines[i].txt,gMeme.lines[i].pos.x,gMeme.lines[i].pos.y)
+            }
         }
 
-        var lenghtOfText = gCtx.measureText(gMeme.lines[i].txt.toUpperCase()).width
-        gCtx.fillText(gMeme.lines[i].txt.toUpperCase(),gMeme.lines[i].pos.x,gMeme.lines[i].pos.y)
 
+        if(gMeme.lines[i].caps){
+            gCtx.fillText(gMeme.lines[i].txt.toUpperCase(),gMeme.lines[i].pos.x,gMeme.lines[i].pos.y)
+            var lenghtOfText = gCtx.measureText(gMeme.lines[i].txt.toUpperCase()).width
+        }else{
+            gCtx.fillText(gMeme.lines[i].txt,gMeme.lines[i].pos.x,gMeme.lines[i].pos.y)
+            var lenghtOfText = gCtx.measureText(gMeme.lines[i].txt).width
+        }
 
         if(i===gMeme.selectedLineIdx && textSelection){
             drawSelection(gMeme.lines[i].pos.x,gMeme.lines[i].pos.y,lenghtOfText,gMeme.lines[i].size,gMeme.lines[i].align)
@@ -114,6 +125,7 @@ function addTextLine(event){
             color: 'white',
             stroke: true,
             font: 'Impact',
+            caps: true,
             pos: {x: gElCanvas.width/2,y: gElCanvas.height/2}
         }
     )
@@ -129,6 +141,13 @@ function deleteTextLine(event){
     if(gMeme.lines.length === 1) return;
     gMeme.lines.splice(gMeme.selectedLineIdx,1)
     switchLine(event)
+    toggleSelection(true)
+}
+
+function toggleCaps(event){
+    stopProp(event)
+    closeShare()
+    gMeme.lines[gMeme.selectedLineIdx].caps = !gMeme.lines[gMeme.selectedLineIdx].caps
     toggleSelection(true)
 }
 

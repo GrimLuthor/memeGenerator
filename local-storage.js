@@ -42,3 +42,9 @@ function deleteFromStorage(id){
 
     localStorage.savedMemes = JSON.stringify(memes)
 }
+
+function deleteFromSaved(event,id){
+    stopProp(event)
+    deleteFromStorage(id)
+    renderSavedMemes()
+}

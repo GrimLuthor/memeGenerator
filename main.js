@@ -136,7 +136,11 @@ function renderSavedMemes(){
     var savedMemes = loadAllFromLocalStorage()
 
     var strHTML = savedMemes.map((meme)=>{
-        return `<div class="image" onclick="editSavedMeme('${meme.memeId}')"><img src="${meme.url}"></div>`
+        return `<div class="image" onclick="editSavedMeme('${meme.memeId}')">
+        <button class="btn optdelete" onclick="deleteFromSaved(event,'${meme.memeId}')">
+        <img src="ICONS/trash.png">
+        </button>
+        <img src="${meme.url}"></div>`
     }).join('')
 
     document.querySelector('.image-container').innerHTML = strHTML

@@ -18,6 +18,7 @@ header {
 }
 
 .nav {
+    user-select: none;
     width: auto;
     font-size: large;
     font-family: "Trebuchet MS", Helvetica, sans-serif;

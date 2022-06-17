@@ -24,14 +24,12 @@ function addTouchListeners() {
 function onDown(ev) {
 
     closeShare()
+
    
     //Get the ev pos from mouse or touch
     const clickPos = getEvPos(ev)
 
     var selectedText = false;
-
-   
-    
 
     for(var i = 0; i < gMeme.lines.length; i++){
         if(isTextClicked(clickPos,i)){
@@ -57,6 +55,7 @@ function onDown(ev) {
     
     gStartPos = clickPos
     document.body.style.cursor = 'grabbing'
+    console.log('grab');
 
 }
 
@@ -71,17 +70,17 @@ function isTextClicked(pos,i){
 
     //width check
     if(gMeme.lines[i].align === 'left'){
-        if(pos.x > gMeme.lines[i].pos.x && pos.x < gMeme.lines[i].pos.x+length){
+        if(pos.x > gMeme.lines[i].pos.x-2 && pos.x < gMeme.lines[i].pos.x+length+2){
             rightWidth = true;
 
         }
     }else if(gMeme.lines[i].align === 'center'){
-        if(pos.x > gMeme.lines[i].pos.x-(length/2) && pos.x < gMeme.lines[i].pos.x+(length/2)){
+        if(pos.x > gMeme.lines[i].pos.x-(length/2)-2 && pos.x < gMeme.lines[i].pos.x+(length/2)+2){
             rightWidth = true;
 
         }
     }else{
-        if(pos.x > gMeme.lines[i].pos.x - length && pos.x < gMeme.lines[i].pos.x){
+        if(pos.x > gMeme.lines[i].pos.x - length -2 && pos.x < gMeme.lines[i].pos.x+2){
             rightWidth = true;
 
         }
