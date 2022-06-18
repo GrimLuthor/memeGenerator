@@ -3,7 +3,6 @@
     box-sizing: border-box;
     padding: 20px;
 
-
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
@@ -11,6 +10,7 @@
 }
 
 .image-container img {
+    border-radius: 15px;
     max-width: 350px;
     max-height: 350px;
     margin: 5px;
@@ -26,9 +26,11 @@
 .filter-input {
     height: 50px;
     font-size: larger;
+    margin-left: 10px;
 }
 
 .filter-saved-input {
+    margin-left: 10px;
     height: 50px;
     font-size: larger;
 }

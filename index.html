@@ -7,25 +7,25 @@
     <title>Meme Generator</title>
     <link rel="stylesheet" href="style/main.css">
 </head>
-<body onload="init()">
+<body class="body" onload="init()">
     <header>
         <div class="dropbtn" onclick="dropdown()">≡</div>
         <div class="dropdown hidden">
             <div class="btn-d" onclick="savedMemes()">Saved</div>
             <div class="btn-d" onclick="toGallery()">Gallery</div>
         </div>
-        <div class="logo"><img src="LOGO.png"></div>
+        <div class="logo" onclick="toGallery()"><img src="LOGO.png"></div>
         <div class="nav">
             <div class="to-saved"><h1 onclick="savedMemes()">Saved Memes</h1></div>
-            <div class="to-gallery"><h1 onclick="toGallery()">Gallery</h1></div>
+            <div class="to-gallery selected"><h1 onclick="toGallery()">Gallery</h1></div>
         </div>
     </header>
     <main>
         <div class="filter">
-            <input type="text" class="filter-input" placeholder="filter" oninput="renderGallery()">
+            <input type="text" class="filter-input" placeholder="🔎 search..." onclick="dropdown()" oninput="renderGallery()">
         </div>
         <div class="filter-saved">
-            <input type="text" class="filter-saved-input hidden" placeholder="filter" oninput="renderSavedMemes()">
+            <input type="text" class="filter-saved-input hidden" placeholder="🔎 search..." onclick="dropdown()" oninput="renderSavedMemes()">
         </div>
 
         <div class="image-container">
@@ -74,7 +74,7 @@
                     <button class="share btn" onclick="shareAndDownload()"><img src="ICONS/share.png"></button>
                     <button class="save btn hidden" onclick="saveToLocalStorage()"><img src="ICONS/save.png"></button>
                     <a class="download hidden" href="#" class="download" onclick="downloadMeme(this)" download="my-img.jpg"><img src="ICONS/download.png"></a>
-                    <button class="facebook btn hidden"><img src="ICONS/facebook-logo.png"></button>
+                    <button class="facebook btn hidden" onclick="facebookShare()"><img src="ICONS/facebook-logo.png"></button>
                 </div>
           
             </div>

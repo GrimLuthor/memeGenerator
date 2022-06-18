@@ -69,7 +69,7 @@ var gImgs = [
     {
         id: 14,
         url: 'meme-imgs/14.jpg',
-        keywords: ['matrix','sunglasses']
+        keywords: ['matrix','sunglasses','morpheus']
     },
     {
         id: 15,
@@ -133,8 +133,9 @@ function savedMemes(){
 
     document.querySelector('.dropdown').classList.add('hidden')
     document.querySelector('.image-container').style.display = 'flex'
-    document.querySelector('.to-saved').style.borderBottom = '1px solid black'
-    document.querySelector('.to-gallery').style.borderBottom = '0'
+    
+    selectSaved()
+    
     document.querySelector('.editor').style.display = 'none'
 
     renderSavedMemes()
@@ -162,8 +163,9 @@ function toGallery(){
     document.querySelector('.dropdown').classList.add('hidden')
     document.querySelector('.image-container').style.display = 'flex'
     document.querySelector('.editor').style.display = 'none'
-    document.querySelector('.to-saved').style.borderBottom = '0'
-    document.querySelector('.to-gallery').style.borderBottom = '1px solid black'
+
+    selectGallery()
+
     renderGallery()
 }
 
@@ -185,4 +187,26 @@ function defaultTools(){
     gElInput.placeholder = 'Text 1'
     document.querySelector('.font').value = 'Impact'
     document.querySelector('.colorpicker').value = '#FFFFFF'
+}
+
+function facebookShare(){
+    console.log('not today,sorry'); 
+    //really tried to make it work, need more research about encoding and decoding different formats
+}
+
+
+function toggleSelected(){
+    document.querySelector('.to-saved').classList.toggle('selected')
+    document.querySelector('.to-gallery').classList.toggle('selected')
+}
+
+
+function selectGallery(){
+    document.querySelector('.to-saved').classList.remove('selected')
+    document.querySelector('.to-gallery').classList.add('selected')
+}
+
+function selectSaved(){
+    document.querySelector('.to-saved').classList.add('selected')
+    document.querySelector('.to-gallery').classList.remove('selected')
 }

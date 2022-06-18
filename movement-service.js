@@ -55,7 +55,7 @@ function onDown(ev) {
     
     gStartPos = clickPos
     document.body.style.cursor = 'grabbing'
-    console.log('grab');
+    console.log('grabbing');
 
 }
 

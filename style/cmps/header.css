@@ -36,6 +36,12 @@ header {
 
 .to-gallery {
     margin: 1vh;
+
+}
+
+
+.selected {
+    color: #e2e2e2;
     border-bottom: 1px solid black;
 }
 

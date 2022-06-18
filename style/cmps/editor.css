@@ -8,6 +8,7 @@
 
 
 .toolbar {
+    border-radius: 15px;
     max-width: 98vw;
     width: 300px;
     margin-left: 100px;

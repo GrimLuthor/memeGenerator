@@ -15,6 +15,8 @@ function saveToLocalStorage(){
     }
     console.log('Saved meme to local storage');
     console.log(JSON.parse(localStorage.savedMemes))
+
+    savedMemes()
 }
 
 function loadFromLocalStorage(id){
